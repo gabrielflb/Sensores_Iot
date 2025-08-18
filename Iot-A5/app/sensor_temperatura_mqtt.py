@@ -2,15 +2,17 @@ import os
 import time
 import json
 import random
+from dotenv import load_dotenv
 import datetime
 import base64
 import paho.mqtt.client as mqtt
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 
+load_dotenv()
 # ===== CONFIG =====
 BROKER = os.getenv("MQTT_BROKER", "localhost")
-PORT = int(os.getenv("MQTT_PORT", "1883"))
-TOPIC = os.getenv("MQTT_TOPIC", "sensors/temperature/device01")
+PORT = int(os.getenv("MQTT_PORT", ""))
+TOPIC = os.getenv("MQTT_TOPIC", "")
 
 # CHAVE SECRETA (32 bytes = AES-256) -> guardar em variável de ambiente
 KEY = os.getenv("AES_KEY", "12345678901234567890123456789012").encode()

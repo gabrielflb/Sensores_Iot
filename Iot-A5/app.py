@@ -11,17 +11,21 @@ import jwt
 from fastapi import Query
 from datetime import datetime, timedelta
 import uvicorn
+from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
 from aiocoap import resource, Message, Code
 from aiocoap import resource, Context
 import asyncio
 
+
+load_dotenv()
+
 # -------------------- Config --------------------
 MQTT_BROKER = os.getenv("MQTT_BROKER", "127.0.0.1")
-MQTT_PORT = int(os.getenv("MQTT_PORT", "1883"))
+MQTT_PORT = int(os.getenv("MQTT_PORT", ""))
 MQTT_TOPICS = [("sensors/#", 1)]
-AES_KEY_ENV = os.getenv("AES_KEY", "12345678901234567890123456789012")
-SECRET_KEY = os.getenv("JWT_SECRET", "supersecretjwtkey123!")
+AES_KEY_ENV = os.getenv("AES_KEY", "")
+SECRET_KEY = os.getenv("JWT_SECRET", "")
 
 if not AES_KEY_ENV:
     raise RuntimeError("AES_KEY não definida. Exemplo: export AES_KEY='32-bytes-string...'")

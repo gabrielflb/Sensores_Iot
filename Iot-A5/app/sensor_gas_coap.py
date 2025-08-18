@@ -4,13 +4,15 @@ import base64
 from aiocoap import Context, Message, PUT
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 import os
+from dotenv import load_dotenv
 import random
 
+load_dotenv()
 # -------------------- Config --------------------
 BACKEND_COAP_HOST = "127.0.0.1"
 BACKEND_COAP_PORT = 5683
 RESOURCE_PATH = "gas_level"  # path do backend
-AES_KEY = os.getenv("AES_KEY", "12345678901234567890123456789012").encode()
+AES_KEY = os.getenv("AES_KEY", "").encode()
 
 if len(AES_KEY) != 32:
     raise RuntimeError("AES_KEY deve ter 32 bytes")
